@@ -4,10 +4,9 @@
     <style>
       .cls-1 {
         fill: #ffd45f;
-        font-family: ProximaNova-Regular, 'Proxima Nova';
-        font-size: 774.08px;
+        stroke-width: 0px;
       }
     </style>
   </defs>
-  <text class="cls-1" transform="translate(707.65 736.62)"><tspan x="0" y="0">X</tspan></text>
+  <path class="cls-1" d="M1124.88,736.62l-164.88-219.84-164.88,219.84h-78.18l201.26-264.73-189.65-251.58h78.18l153.27,206.68,152.49-206.68h78.18l-188.87,250.8,200.49,265.51h-77.41Z"/>
 </svg>
