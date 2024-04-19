@@ -10,7 +10,10 @@ export default function Home() {
     console.log('turn ' + turn)
   }, [])
 
-  const [turn, setTurn] = useState('X')
+  const [turn, setTurn] = useState(1)
+  const [visible, setVisible] = useState('invisible')
+  const [board, setBoard] = useState([[null, null, null,], [null, null, null], [null, null, null]])
+  
   
 
   return (
@@ -30,8 +33,14 @@ export default function Home() {
   );
 }
 
+const setPiece = () => {
+  console.log('setPiece')
+}
+
 const Tiles = ({ piece }) => (
-    <div className='flex bg-black h-full aspect-square'>
-      <Image src={piece} width={500} alt='xsvg'></Image>
-    </div>
+  <div className='flex bg-black h-full aspect-square'>
+    <button onClick={setPiece}>
+      <Image className={'hover:scale-125'}  src={piece} width={500} alt='xsvg'></Image>
+    </button>
+  </div>
 );
