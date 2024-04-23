@@ -14,9 +14,9 @@ export default function Home() {
   const [board, setBoard] = useState([[X, null, null,], [null, null, null], [null, null, null]])
   
   const setPiece = () => {
-  console.log('setpiece')
-  setVisible(' visible')
-}
+    console.log('setpiece')
+    setVisible(' visible')
+  }
 
   const [visible, setVisible] = useState(' invisible')
 
