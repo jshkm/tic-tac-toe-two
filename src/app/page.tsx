@@ -11,19 +11,22 @@ export default function Home() {
   }, [])
 
   const [turn, setTurn] = useState(1)
-  const [board, setBoard] = useState([[X, null, null,], [null, null, null], [null, null, null]])
-  
+  const [board, setBoard] = useState([[null, null, null,], [X, X, X], [O, O, O]])
+  const [visible, setVisible] = useState(0)
+
   const setPiece = () => {
     console.log('setpiece')
-    setVisible(' visible')
+    // setVisible(' visible')
   }
-
-  const [visible, setVisible] = useState(' invisible')
 
   const Tiles = ({ piece }) => (
     <div className='flex bg-black h-full aspect-square'>
       <button onClick={setPiece}>
-        <Image className={'hover:scale-125' + visible}  src={piece} width={500} alt='xsvg'></Image>
+        { piece ? (
+          <Image className={'hover:scale-125'}  src={piece} width={500} alt='piece'></Image>
+        ) : (
+          <div></div>
+        )}
       </button>
     </div>
   );
@@ -34,13 +37,17 @@ export default function Home() {
       <div className='bg-white h-2/3 aspect-square grid min-h-80 grid-cols-3 gap-2'>
         {board.map(b0 => (
           b0.map(b1 => (
-            <Tiles piece={X}></Tiles>
+            <Tiles piece={b1}></Tiles>
             // <div className={'border-2 border-rose-300 ' + visible}></div>
           ))
         ))}
       </div>
     </div>
-    {/* <button onClick={() => setVisible('bg-red-500')} className='text-white'>push me</button> */}
+    {/* <button onClick={() => setVisible(1)} className='text-white'>push me</button>
+    { visible && (
+      <div className='text-white'>hello world</div>
+      )
+    } */}
     </>
   );
 }
