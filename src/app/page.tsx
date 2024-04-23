@@ -14,14 +14,15 @@ export default function Home() {
   const [board, setBoard] = useState([[null, null, null,], [X, X, X], [O, O, O]])
   const [visible, setVisible] = useState(0)
 
-  const setPiece = () => {
-    console.log('setpiece')
-    // setVisible(' visible')
+  const setPiece = (i, j) => {
+    board[i][j] = X
+    setBoard(board)
+    console.log(board)
   }
 
-  const Tiles = ({ piece }) => (
+  const Tiles = ({ piece, i, j }) => (
     <div className='flex bg-black h-full aspect-square'>
-      <button className='h-full aspect-square' onClick={setPiece}>
+      <button className='h-full aspect-square' onClick={() => setPiece(i, j)}>
         { piece ? (
           <Image className={'hover:scale-125'}  src={piece} width={500} alt='piece'></Image>
         ) : (
@@ -35,9 +36,9 @@ export default function Home() {
     <>
       <div className='flex items-center justify-center h-screen w-screen'>
         <div className='bg-white h-2/3 aspect-square grid min-h-80 grid-cols-3 gap-2'>
-          {board.map(b0 => (
-            b0.map(b1 => (
-              <Tiles piece={b1}></Tiles>
+          {board.map((row, i) => (
+            row.map((col, j) => (
+              <Tiles piece={col} i={i} j={j}></Tiles>
               // <div className={'border-2 border-rose-300 ' + visible}></div>
             ))
           ))}
