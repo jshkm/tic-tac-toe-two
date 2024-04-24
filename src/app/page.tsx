@@ -7,16 +7,63 @@ import React, { useState, useEffect } from 'react'
 export default function Home() {
   const [turn, setTurn] = useState(X)
   const [board, setBoard] = useState([[null, null, null,], [null, null, null], [null, null, null]])
-  const [visible, setVisible] = useState(0)
+  const [pool, setPool] = useState(6)
 
   useEffect(() => {
     console.log('render')
   })
 
+  const init = () => {
+    console.log('init')
+    setTurn(X)
+    setBoard([[null, null, null,], [null, null, null], [null, null, null]])
+    setPool(6)
+  }
+
+  const checkWin = () => {
+    if (board[0][0] != null && board[0][0] == board[0][1] && board[0][0] == board[0][2]) {
+      // first row
+      console.log('win!')
+      init()
+    } else if (board[1][0] != null && board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
+      // second row
+      console.log('win!')
+      init()
+    } else if (board[2][0] != null && board[2][0] == board[2][1] && board[2][0] == board[2][2]) {
+      // third row
+      console.log('win!')
+      init()
+    } else if (board[0][0] != null && board[0][0] == board[1][0] && board[0][0] == board[2][0]) {
+      // first col
+      console.log('win!')
+      init()
+    } else if (board[0][1] != null && board[0][1] == board[1][1] && board[0][1] == board[2][1]) {
+      // second col
+      console.log('win!')
+      init()
+    } else if (board[0][2] != null && board[0][2] == board[1][2] && board[0][2] == board[2][2]) {
+      // third col
+      console.log('win!')
+      init()
+    } else if (board[0][0] != null && board[0][0] == board[1][1] && board[0][0] == board[2][2]) {
+      // left diag
+      console.log('win!')
+      init()
+    } else if (board[2][0] != null && board[2][0] == board[1][1] && board[2][0] == board[0][2]) {
+      // right diag
+      console.log('win!')
+      init()
+    }
+  }
+
   const setPiece = (i, j) => {
-    board[i][j] = turn
-    setBoard(board)
-    setTurn(turn == X ? O : X)
+    if(board[i][j] == null && pool > 0) {
+      board[i][j] = turn
+      checkWin()
+      setPool(pool - 1)
+      setBoard(board)
+      setTurn(turn == X ? O : X)
+    } 
   }
 
   const Tiles = ({ piece, i, j }) => (
@@ -43,10 +90,10 @@ export default function Home() {
           ))}
         </div>
       </div>
-    {/* <button onClick={() => setVisible(1)} className='text-white'>
-      <div className='h-4 w-4'></div>
+    <button onClick={init} className='flex justify-center items-center w-screen text-black'>
+      <div className='bg-white h-8'>RESTART</div>
     </button>
-    { visible ? (
+    {/* { visible ? (
       <div className='text-white'>hello world</div>
       ) : (
       <div className='text-white'>pee pee</div>
