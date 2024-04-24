@@ -5,19 +5,18 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 
 export default function Home() {
-
-  useEffect(() => {
-    console.log('turn ' + turn)
-  }, [])
-
-  const [turn, setTurn] = useState(1)
-  const [board, setBoard] = useState([[null, null, null,], [X, X, X], [O, O, O]])
+  const [turn, setTurn] = useState(X)
+  const [board, setBoard] = useState([[null, null, null,], [null, null, null], [null, null, null]])
   const [visible, setVisible] = useState(0)
 
+  useEffect(() => {
+    console.log('render')
+  })
+
   const setPiece = (i, j) => {
-    board[i][j] = X
+    board[i][j] = turn
     setBoard(board)
-    console.log(board)
+    setTurn(turn == X ? O : X)
   }
 
   const Tiles = ({ piece, i, j }) => (
