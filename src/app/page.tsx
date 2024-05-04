@@ -6,23 +6,25 @@ import React, { useState, useEffect } from 'react'
 
 export default function Home() {
   class Piece {
-    constructor(src, id, chosen, i, j) {
+    constructor(src, chosen, i, j) {
       this.src = src;
-      this.id = id;
       this.chosen = chosen;
       this.i = i;
       this.j = j;
     }
   }
 
-  const none = new Piece(null, 0, '')
-  const [X1, setX1] = useState(new Piece(X, 1, '', 0, 0))
-  const [X2, setX2] = useState(new Piece(X, 2, '', 0, 0))
-  const [X3, setX3] = useState(new Piece(X, 3, '', 0, 0))
+  const none = new Piece(null, 0, '', null, null)
+  const [X1, setX1] = useState(new Piece(X, '', 0, 0))
+  const [X2, setX2] = useState(new Piece(X, '', 0, 0))
+  const [X3, setX3] = useState(new Piece(X, '', 0, 0))
   
-  const [O1, setO1] = useState(new Piece(O, 1, '', 0, 0))
-  const [O2, setO2] = useState(new Piece(O, 2, '', 0, 0))
-  const [O3, setO3] = useState(new Piece(O, 3, '', 0, 0))
+  const [O1, setO1] = useState(new Piece(O, '', 0, 0))
+  const [O2, setO2] = useState(new Piece(O, '', 0, 0))
+  const [O3, setO3] = useState(new Piece(O, '', 0, 0))
+
+  const [tmpX, setTmpX] = useState(new Piece(X, ' brightness-50', null, null))
+  const [tmpO, setTmpO] = useState(new Piece(O, ' brightness-50', null, null))
 
   const [random, setRandom] = useState(0)
 
@@ -38,12 +40,10 @@ export default function Home() {
 
   const init = () => {
     console.log('init')
-    X1.chosen = ''
-    X2.chosen = ''
-    X3.chosen = ''
-    O1.chosen = ''
-    O2.chosen = ''
-    O3.chosen = ''
+    tmpX.i = null
+    tmpX.j = null
+    tmpO.i = null
+    tmpO.j = null
     setTurn(X)
     setBoard([[none, none, none,], [none, none, none], [none, none, none]])
     setXpool([X3, X2, X1])
@@ -87,33 +87,51 @@ export default function Home() {
   }
 
   const checkNextPiece = async () => {
-    console.log('check next peice')
-    // X1.chosen = ''
-    // X2.chosen = ''
-    // X3.chosen = ''
-    // O1.chosen = ''
-    // O2.chosen = ''
-    // O3.chosen = ''
+    console.log(turn)
 
     if (turn == O) {
-      let resetX = [X1, X2, X3].at(random)
-      resetX.chosen = ''
-      console.log(random)
+      console.log(tmpO.i)
+      console.log(tmpO.j)
+      if (tmpO.i != null && tmpO.j != null) {
+        console.log('reset')
+        board[tmpO.i][tmpO.j] = none
+      }
+
       setRandom(Math.floor(Math.random() * 3))
 
       let tmp = [X1, X2, X3].at(random)
-      tmp.chosen = ' brightness-50'
+      let i = tmp.i
+      let j = tmp.j
+
+      tmpX.i = i
+      tmpX.j = j
+
+      board[i][j] = tmpX
       Xpool.push(tmp)
     } else {
-      let resetO = [O1, O2, O3].at(random)
-      resetO.chosen = ''
-      console.log(random)
+
+      console.log(tmpX.i)
+      console.log(tmpX.j)
+
+      if (tmpX.i != null && tmpX.j != null) {
+        console.log('resetX')
+        board[tmpX.i][tmpX.j] = none
+      }
+      
       setRandom(Math.floor(Math.random() * 3))
+
       let tmp = [O1, O2, O3].at(random)
-      tmp.chosen = ' brightness-50'
+      let i = tmp.i
+      let j = tmp.j
+
+      tmpO.i = i
+      tmpO.j = j
+
+      board[i][j] = tmpO
       Opool.push(tmp)
     }
-    console.log(random)
+    setBoard(board)
+    console.log(board)
   }
 
   const setPiece = (i, j) => {
@@ -136,8 +154,8 @@ export default function Home() {
     if (Xpool.length == 0 && Opool.length == 0) {
       checkNextPiece()
     }
-    console.log(Xpool)
-    console.log(Opool)
+    // console.log(Xpool)
+    // console.log(Opool)
     setBoard(board)
     setTurn(turn == X ? O : X)
     checkWin()
