@@ -6,3 +6,11 @@ body {
   background: black;
   color: white;
 }
+
+.myFont {
+  font-family: var(--myFont);
+}
+
+.inter {
+  font-family: var(--font-inter)
+}
