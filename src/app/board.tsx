@@ -23,8 +23,8 @@ export default function Board() {
   const [O2, setO2] = useState(new Piece(O, '', 0, 0))
   const [O3, setO3] = useState(new Piece(O, '', 0, 0))
 
-  const [tmpX, setTmpX] = useState(new Piece(X, ' brightness-50', null, null))
-  const [tmpO, setTmpO] = useState(new Piece(O, ' brightness-50', null, null))
+  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse grayscale brightness-200', null, null))
+  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse grayscale brightness-200', null, null))
 
   const [random, setRandom] = useState(0)
 
