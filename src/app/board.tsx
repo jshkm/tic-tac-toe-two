@@ -3,6 +3,7 @@ import X from '../../public/x.svg'
 import O from '../../public/o.svg'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 export default function Board() {
   class Piece {
@@ -163,13 +164,13 @@ export default function Board() {
 
   const Tiles = ({ piece, i, j }) => (
     <div className='flex bg-black h-full aspect-square'>
-      <button className={'h-full aspect-square' + piece.chosen} onClick={() => setPiece(i, j)}>
+      <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.chosen} onClick={() => setPiece(i, j)}>
         { piece.src ? (
-          <Image className={'hover:scale-125'}  src={piece.src} width={500} alt='piece'></Image>
+          <Image className={''}  src={piece.src} width={500} alt='piece'></Image>
         ) : (
           <div className='h-full aspect-square'></div>
         )}
-      </button>
+      </motion.button>
     </div>
   );
 
