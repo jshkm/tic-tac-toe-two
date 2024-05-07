@@ -149,6 +149,7 @@ export default function Board() {
         board[i][j] = tmpO
         setOpool(Opool)
       }
+      setTurn(turn == X ? O : X)
     }
 
     if (Xpool.length == 0 && Opool.length == 0) {
@@ -157,7 +158,6 @@ export default function Board() {
     // console.log(Xpool)
     // console.log(Opool)
     setBoard(board)
-    setTurn(turn == X ? O : X)
     checkWin()
   }
 
