@@ -3,12 +3,7 @@
 @tailwind utilities;
 
 body {
-  background: black
-}
-
-
-.board {
-  height: 10px; /* Adjust the height of the line */
-  background-color: black; /* Adjust the color of the line */
-  width: 100%; /* Adjust the width of the line */
+  background: black;
+  color: white;
+  font-family: 'Trebuchet MS';
 }
