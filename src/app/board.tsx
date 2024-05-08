@@ -58,35 +58,35 @@ export default function Board() {
     if (board[0][0].src != null && board[0][0].src == board[0][1].src && board[0][0].src == board[0][2].src) {
       // first row
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[1][0].src != null && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[2][0].src != null && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[0][0].src != null && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[0][1].src != null && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[0][2].src != null && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[0][0].src != null && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
       console.log('win!')
-      init()
+      setIsWin(true)
     } else if (board[2][0].src != null && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
       console.log('win!')
-      init()
+      setIsWin(true)
     }
   }
 
@@ -163,7 +163,6 @@ export default function Board() {
     // console.log(Opool)
     setBoard(board)
     checkWin()
-    setIsWin(true)
   }
 
   const Tiles = ({ piece, i, j }) => (
@@ -187,9 +186,7 @@ export default function Board() {
           ))
         ))}
       </div>
-      {/* <div className='hidden'> */}
-        <Win isWin={isWin} setIsWin={setIsWin}></Win>
-      {/* </div> */}
+      <Win isWin={isWin} setIsWin={setIsWin} init={init}></Win>
     </motion.div>
   );
 }

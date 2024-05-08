@@ -1,7 +1,12 @@
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useEffect, useState } from 'react'
 
-function Win({ isWin, setIsWin }) {
+function Win({ isWin, setIsWin, init }) {
+
+  const restart = () => {
+    setIsWin(false)
+    init()
+  }
 
   return (
     <>
@@ -11,7 +16,7 @@ function Win({ isWin, setIsWin }) {
           <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
             <DialogTitle className="font-bold">You Win!</DialogTitle>
             <div className="flex gap-4">
-              <button onClick={() => setIsWin(false)}>Play Again!</button>
+              <button onClick={() => restart()}>Play Again!</button>
             </div>
           </DialogPanel>
         </div>
