@@ -1,4 +1,5 @@
 "use client";
+import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import Board from './board'
 export default function Home() {
@@ -12,8 +13,7 @@ export default function Home() {
       setCount(count => {
         if (count >= 15) {
           clearInterval(interval);
-          setStart(true);
-          setFont(' bit')
+          animateTitle()
           return count;
         }
         console.log(count % fonts.length)
@@ -24,14 +24,23 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    console.log(start)
+    console.log('lucky duck')
+  })
+
+  const animateTitle = () => {
+    setFont(' bit')
+    setStart(true);
+  }
+
   return (
     <div className='flex flex-col justify-center items-center h-screen'>
-      <h1 className={'text-7xl' + font}>Tic Tac Toe 2</h1>
-      { start ? (
+      <motion.h1 initial={ start ? {scale: 0} : {scale : 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 90, damping: 50}} className={'text-7xl' + font}>Tic Tac Toe 2</motion.h1>
+      { start && (
         <Board></Board>
-      ) : (
-        <div></div>
       )}
+
       <p className='bit'>made by josh</p>
     </div>
   );

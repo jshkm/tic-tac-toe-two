@@ -1,6 +1,7 @@
 "use client";
 import X from '../../public/x.svg'
 import O from '../../public/o.svg'
+import Win from './winModal'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
@@ -33,6 +34,8 @@ export default function Board() {
   const [board, setBoard] = useState([[none, none, none,], [none, none, none], [none, none, none]])
   const [Xpool, setXpool] = useState([X3, X2, X1])
   const [Opool, setOpool] = useState([O3, O2, O1])
+
+  const [isWin, setIsWin] = useState(false)
   
 
   useEffect(() => {
@@ -160,6 +163,7 @@ export default function Board() {
     // console.log(Opool)
     setBoard(board)
     checkWin()
+    setIsWin(true)
   }
 
   const Tiles = ({ piece, i, j }) => (
@@ -175,7 +179,7 @@ export default function Board() {
   );
 
   return (
-    <div className='flex items-center justify-center h-5/6 w-full'>
+    <motion.div initial={{scale: 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 400, damping: 38}} className='flex items-center justify-center h-5/6 w-full'>
       <div className='bg-white h-3/4 aspect-square grid min-h-80 grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (
@@ -183,6 +187,9 @@ export default function Board() {
           ))
         ))}
       </div>
-    </div>
+      {/* <div className='hidden'> */}
+        <Win isWin={isWin} setIsWin={setIsWin}></Win>
+      {/* </div> */}
+    </motion.div>
   );
 }
