@@ -17,7 +17,6 @@ function Win({ isWin, setIsWin, init, winner }) {
         <DialogPanel className="flex flex-col items-center justify-center min-h-80 h-1/2 aspect-square text-center">
           <Image className='' src={winner} style={{objectFit:"contain"}} alt='piece'></Image>
           <p className='bit font-bold text-9xl'>Wins!</p>
-          <button className='bit text-2xl' onClick={() => restart()}>restart</button>
         </DialogPanel>
       </div>
     </Dialog>

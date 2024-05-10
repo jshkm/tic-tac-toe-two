@@ -38,12 +38,18 @@ export default function Home() {
     <div className='flex flex-col justify-center items-center h-screen'>
       <motion.h1 initial={ start ? {scale: 0} : {scale : 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 90, damping: 50}} className={'text-7xl' + font}>Tic Tac Toe 2</motion.h1>
       { start && (
-        <Board></Board>
+        <>
+          <Board></Board>
+
+          <div className={'flex flex-row justify-around items-end w-screen text-6xl' + font}>
+            <div>Player X</div>
+            <p className='text-xl'>made by josh</p>
+            <div>Player O</div>
+          </div>
+        </>
       )}
 
-      <p className='bit'>made by josh</p>
     </div>
   );
 }
-
 
