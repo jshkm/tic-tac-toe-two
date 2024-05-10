@@ -178,7 +178,7 @@ function Board({setXWins, setOWins, xWins, oWins}) {
     <div className='flex bg-black h-full aspect-square'>
       <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.chosen} onClick={() => setPiece(i, j)}>
         { piece.src ? (
-          <Image className='scale-50'  src={piece.src} width={500} alt='piece'></Image>
+          <Image className='scale-50' src={piece.src} style={{objectFit:"contain"}} alt='piece'></Image>
         ) : (
           <div className='h-full aspect-square'></div>
         )}
