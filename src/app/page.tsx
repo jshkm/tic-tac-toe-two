@@ -7,6 +7,8 @@ export default function Home() {
   const [font, setFont] = useState(' myFont');
   const fonts = [' jacq', ' inter', ' bit', ' script', ' serif'];
   const [count, setCount] = useState(0);
+  const [xWins, setXWins] = useState(0)
+  const [oWins, setOWins] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,7 +27,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(start)
+    console.log(xWins)
     console.log('lucky duck')
   })
 
@@ -36,15 +38,15 @@ export default function Home() {
 
   return (
     <div className='flex flex-col justify-center items-center h-screen'>
-      <motion.h1 initial={ start ? {scale: 0} : {scale : 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 90, damping: 50}} className={'text-7xl' + font}>Tic Tac Toe 2</motion.h1>
+      {!start && (<h1 className={'text-7xl' + font}>Tic Tac Toe 2</h1>)}
       { start && (
         <>
-          <Board></Board>
-
+          <motion.h1 initial={{ y: '-100%' }} animate={{y:'0%'}} className={'text-7xl' + font}>Tic Tac Toe 2</motion.h1>
+          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins}></Board>
           <div className={'flex flex-row justify-around items-end w-screen text-6xl' + font}>
-            <div>Player X</div>
+            <motion.div initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.div>
             <p className='text-xl'>made by josh</p>
-            <div>Player O</div>
+            <motion.div initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.div>
           </div>
         </>
       )}

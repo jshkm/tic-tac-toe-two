@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-export default function Board() {
+function Board({setXWins, setOWins, xWins, oWins}) {
   class Piece {
     constructor(src, chosen, i, j) {
       this.src = src;
@@ -37,11 +37,11 @@ export default function Board() {
 
   const [isWin, setIsWin] = useState(false)
   const [winner, setWinner] = useState(null)
-  
 
   useEffect(() => {
+    updateScore()
     console.log('render')
-  })
+  }, [winner])
 
   const init = () => {
     console.log('init')
@@ -53,6 +53,7 @@ export default function Board() {
     setBoard([[none, none, none,], [none, none, none], [none, none, none]])
     setXpool([X3, X2, X1])
     setOpool([O3, O2, O1])
+    setWinner(null)
   }
 
   const checkWin = () => {
@@ -100,13 +101,8 @@ export default function Board() {
   }
 
   const checkNextPiece = async () => {
-    console.log(turn)
-
     if (turn == O) {
-      console.log(tmpO.i)
-      console.log(tmpO.j)
       if (tmpO.i != null && tmpO.j != null) {
-        console.log('reset')
         board[tmpO.i][tmpO.j] = none
       }
 
@@ -122,12 +118,7 @@ export default function Board() {
       board[i][j] = tmpX
       Xpool.push(tmp)
     } else {
-
-      console.log(tmpX.i)
-      console.log(tmpX.j)
-
       if (tmpX.i != null && tmpX.j != null) {
-        console.log('resetX')
         board[tmpX.i][tmpX.j] = none
       }
       
@@ -144,7 +135,6 @@ export default function Board() {
       Opool.push(tmp)
     }
     setBoard(board)
-    console.log(board)
   }
 
   const setPiece = (i, j) => {
@@ -168,10 +158,20 @@ export default function Board() {
     if (Xpool.length == 0 && Opool.length == 0) {
       checkNextPiece()
     }
-    // console.log(Xpool)
-    // console.log(Opool)
+
     setBoard(board)
     checkWin()
+    console.log('finished')
+  }
+
+  const updateScore = () => {
+    if (winner == X) {
+      setXWins(xWins + 1)
+      console.log(xWins)
+    } else if (winner == O) {
+      setOWins(oWins + 1)
+      console.log(oWins)
+    }
   }
 
   const Tiles = ({ piece, i, j }) => (
@@ -191,7 +191,7 @@ export default function Board() {
       <div className='bg-white h-3/4 aspect-square grid min-h-80 grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (
-            <Tiles piece={col} i={i} j={j}></Tiles>
+            <Tiles piece={col} i={i} j={j} key={`${i}-${j}`}></Tiles>
           ))
         ))}
       </div>
@@ -199,3 +199,5 @@ export default function Board() {
     </motion.div>
   );
 }
+
+export default Board;
