@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-function Board({setXWins, setOWins, xWins, oWins}) {
+function Board({setXWins, setOWins, xWins, oWins, turn, setTurn}) {
   class Piece {
     constructor(src, chosen, i, j) {
       this.src = src;
@@ -30,7 +30,6 @@ function Board({setXWins, setOWins, xWins, oWins}) {
 
   const [random, setRandom] = useState(0)
 
-  const [turn, setTurn] = useState(X)
   const [board, setBoard] = useState([[none, none, none,], [none, none, none], [none, none, none]])
   const [Xpool, setXpool] = useState([X3, X2, X1])
   const [Opool, setOpool] = useState([O3, O2, O1])

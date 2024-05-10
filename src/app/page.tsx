@@ -2,6 +2,9 @@
 import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import Board from './board'
+import X from '../../public/x.svg'
+import O from '../../public/o.svg'
+
 export default function Home() {
   const [start, setStart] = useState(false);
   const [font, setFont] = useState(' myFont');
@@ -9,6 +12,7 @@ export default function Home() {
   const [count, setCount] = useState(0);
   const [xWins, setXWins] = useState(0)
   const [oWins, setOWins] = useState(0)
+  const [turn, setTurn] = useState(X)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,11 +46,11 @@ export default function Home() {
       { start && (
         <>
           <motion.h1 initial={{ y: '-100%' }} animate={{y:'0%'}} className={'text-7xl' + font}>Tic Tac Toe 2</motion.h1>
-          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins}></Board>
+          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn}></Board>
           <div className={'flex flex-row justify-around items-end w-screen text-6xl' + font}>
-            <motion.div initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.div>
+            <motion.div className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.div>
             <p className='text-xl'>made by josh</p>
-            <motion.div initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.div>
+            <motion.div className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.div>
           </div>
         </>
       )}
