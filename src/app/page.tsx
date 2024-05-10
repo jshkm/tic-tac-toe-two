@@ -3,10 +3,10 @@ import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import Board from './board'
 import Drop from './dropdown'
-import X from '../../public/x.svg'
-import O from '../../public/o.svg'
 
 export default function Home() {
+  const X = 'X'
+  const O = 'O'
   const [start, setStart] = useState(false);
   const [font, setFont] = useState(' myFont');
   const [fonts, setFonts] = useState([' bit', ' jacq', ' inter', ' script', ' serif']);

@@ -8,6 +8,11 @@ body {
   overflow-y: hidden;
 }
 
+.font-scale {
+  font-size: clamp(69px, 10vh, 500px);
+  font-weight: bold;
+}
+
 .bit {
   font-family: var(--bit-font);
 }

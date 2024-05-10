@@ -1,6 +1,6 @@
 "use client";
-import X from '../../public/x.svg'
-import O from '../../public/o.svg'
+// import X from '../../public/x.svg'
+// import O from '../../public/o.svg'
 import Win from './winModal'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
@@ -8,25 +8,30 @@ import { motion } from 'framer-motion'
 
 function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
   class Piece {
-    constructor(src, chosen, i, j) {
+    constructor(src, color, i, j) {
       this.src = src;
-      this.chosen = chosen;
+      this.color = color;
       this.i = i;
       this.j = j;
     }
   }
 
-  const none = new Piece(null, 0, '', null, null)
-  const [X1, setX1] = useState(new Piece(X, '', 0, 0))
-  const [X2, setX2] = useState(new Piece(X, '', 0, 0))
-  const [X3, setX3] = useState(new Piece(X, '', 0, 0))
-  
-  const [O1, setO1] = useState(new Piece(O, '', 0, 0))
-  const [O2, setO2] = useState(new Piece(O, '', 0, 0))
-  const [O3, setO3] = useState(new Piece(O, '', 0, 0))
+  const X = 'X'
+  const O = 'O'
+  const [xColor, setXColor] = useState(' text-sky-500')
+  const [yColor, setYColor] = useState(' text-yellow-500')
 
-  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse brightness-200', null, null))
-  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse brightness-200', null, null))
+  const none = new Piece(null, 0, '', null, null)
+  const [X1, setX1] = useState(new Piece(X, xColor, 0, 0))
+  const [X2, setX2] = useState(new Piece(X, xColor, 0, 0))
+  const [X3, setX3] = useState(new Piece(X, xColor, 0, 0))
+  
+  const [O1, setO1] = useState(new Piece(O, yColor, 0, 0))
+  const [O2, setO2] = useState(new Piece(O, yColor, 0, 0))
+  const [O3, setO3] = useState(new Piece(O, yColor, 0, 0))
+
+  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse brightness-200' + xColor, null, null))
+  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse brightness-200' + yColor, null, null))
 
   const [random, setRandom] = useState(0)
 
@@ -35,7 +40,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
   const [Opool, setOpool] = useState([O3, O2, O1])
 
   const [isWin, setIsWin] = useState(false)
-  const [winner, setWinner] = useState(null)
+  const [winner, setWinner] = useState(none)
 
   useEffect(() => {
     updateScore()
@@ -52,7 +57,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
     setBoard([[none, none, none,], [none, none, none], [none, none, none]])
     setXpool([X3, X2, X1])
     setOpool([O3, O2, O1])
-    setWinner(null)
+    setWinner(none)
   }
 
   const checkWin = () => {
@@ -60,42 +65,42 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
       // first row
       console.log('win!')
       setIsWin(true)
-      setWinner(board[0][0].src)
+      setWinner(board[0][0])
     } else if (board[1][0].src != null && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
       console.log('win!')
       setIsWin(true)
-      setWinner(board[1][0].src)
+      setWinner(board[1][0])
     } else if (board[2][0].src != null && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
       console.log('win!')
       setIsWin(true)
-      setWinner(board[2][0].src)
+      setWinner(board[2][0])
     } else if (board[0][0].src != null && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
       console.log('win!')
       setIsWin(true)
-      setWinner(board[0][0].src)
+      setWinner(board[0][0])
     } else if (board[0][1].src != null && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
       console.log('win!')
       setIsWin(true)
-      setWinner(board[0][1].src)
+      setWinner(board[0][1])
     } else if (board[0][2].src != null && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
       console.log('win!')
       setIsWin(true)
-      setWinner(board[0][2].src)
+      setWinner(board[0][2])
     } else if (board[0][0].src != null && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
       console.log('win!')
       setIsWin(true)
-      setWinner(board[0][0].src)
+      setWinner(board[0][0])
     } else if (board[2][0].src != null && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
       console.log('win!')
       setIsWin(true)
-      setWinner(board[2][0].src)
+      setWinner(board[2][0])
     }
   }
 
@@ -138,7 +143,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
 
   const setPiece = (i, j) => {
     if (board[i][j].src == null && (Xpool.length > 0 || Opool.length > 0)) {
-      if (turn  == X) {
+      if (turn == X) {
         let tmpX = Xpool.pop()
         tmpX.i = i
         tmpX.j = j
@@ -164,10 +169,10 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
   }
 
   const updateScore = () => {
-    if (winner == X) {
+    if (winner.src == X) {
       setXWins(xWins + 1)
       console.log(xWins)
-    } else if (winner == O) {
+    } else if (winner.src == O) {
       setOWins(oWins + 1)
       console.log(oWins)
     }
@@ -175,9 +180,9 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
 
   const Tiles = ({ piece, i, j }) => (
     <div className='flex bg-black h-full aspect-square'>
-      <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.chosen} onClick={() => setPiece(i, j)}>
+      <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.color} onClick={() => setPiece(i, j)}>
         { piece.src ? (
-          <Image className='scale-50' src={piece.src} style={{objectFit:"contain"}} alt='piece'></Image>
+          <div className={'font-scale' + font}>{piece.src}</div>
         ) : (
           <div className='h-full aspect-square'></div>
         )}
