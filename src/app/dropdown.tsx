@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { useEffect } from 'react'
 
@@ -19,9 +20,10 @@ function Drop({font, fonts, setFont, setFonts}) {
 
 
   return (
-    <div className=''>
       <Menu>
-        <MenuButton className={'text-7xl' + font} >Tic Tac Toe 2</MenuButton>
+        <motion.div whileHover={{opacity: '50%'}}>
+          <MenuButton className={'text-7xl' + font} >Tic Tac Toe 2</MenuButton>
+        </motion.div>
           <Transition
             enter="duration-200 ease-out"
             enterFrom="scale-95 opacity-0"
@@ -51,7 +53,6 @@ function Drop({font, fonts, setFont, setFonts}) {
             </MenuItems>
           </Transition>
       </Menu>
-    </div>
   )
 }
 

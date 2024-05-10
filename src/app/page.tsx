@@ -14,6 +14,8 @@ export default function Home() {
   const [xWins, setXWins] = useState(0)
   const [oWins, setOWins] = useState(0)
   const [turn, setTurn] = useState(X)
+  const [xColor, setXColor] = useState(' text-sky-500')
+  const [yColor, setYColor] = useState(' text-yellow-500')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,11 +51,11 @@ export default function Home() {
           <motion.div initial={{ y: '-100%' }} animate={{y:'0%'}}>
             <Drop font={font} fonts={fonts} setFont={setFont} setFonts={setFonts}></Drop>
           </motion.div>
-          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn} font={font}></Board>
+          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn} font={font} xColor={xColor} setXColor={setXColor} yColor={yColor} setYColor={yColor}></Board>
           <div className={'flex flex-row justify-around items-end w-full text-6xl' + font}>
-            <motion.div className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.div>
+            <motion.button className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.button>
             <p className='text-xl bit'>made by josh</p>
-            <motion.div className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.div>
+            <motion.button className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.button>
           </div>
         </>
       )}

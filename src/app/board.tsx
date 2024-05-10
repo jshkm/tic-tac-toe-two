@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
+function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, setXColor, yColor, setYColor}) {
   class Piece {
     constructor(src, color, i, j) {
       this.src = src;
@@ -18,9 +18,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
 
   const X = 'X'
   const O = 'O'
-  const [xColor, setXColor] = useState(' text-sky-500')
-  const [yColor, setYColor] = useState(' text-yellow-500')
-
+  
   const none = new Piece(null, 0, '', null, null)
   const [X1, setX1] = useState(new Piece(X, xColor, 0, 0))
   const [X2, setX2] = useState(new Piece(X, xColor, 0, 0))
@@ -30,8 +28,8 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
   const [O2, setO2] = useState(new Piece(O, yColor, 0, 0))
   const [O3, setO3] = useState(new Piece(O, yColor, 0, 0))
 
-  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse brightness-200' + xColor, null, null))
-  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse brightness-200' + yColor, null, null))
+  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse grayscale-[.85] brightness-200' + xColor, null, null))
+  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse grayscale-[.85] brightness-200' + yColor, null, null))
 
   const [random, setRandom] = useState(0)
 

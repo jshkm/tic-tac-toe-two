@@ -1,5 +1,4 @@
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import Image from 'next/image'
 
 function Win({ isWin, setIsWin, init, winner, font }) {
 
