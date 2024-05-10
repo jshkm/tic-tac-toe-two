@@ -12,21 +12,25 @@ body {
 }
 
 .inter {
-  font-family: var(--font-inter)
+  font-family: var(--font-inter);
 }
 
 .bold {
-  font-family: var(--bold-font)
+  font-family: var(--bold-font);
 }
 
 .jacq {
-  font-family: var(--jacq-font)
+  font-family: var(--jacq-font);
 }
 
 .script {
-  font-family: var(--script-font)
+  font-family: var(--script-font);
 }
 
 .serif {
-  font-family: var(--serif-font)
+  font-family: var(--serif-font);
+}
+
+.backdrop {
+  background: #000000b9;
 }

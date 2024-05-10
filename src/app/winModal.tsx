@@ -1,7 +1,10 @@
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import X from '../../public/x.svg'
+import O from '../../public/o.svg'
 
-function Win({ isWin, setIsWin, init }) {
+function Win({ isWin, setIsWin, init, winner }) {
 
   const restart = () => {
     setIsWin(false)
@@ -9,19 +12,15 @@ function Win({ isWin, setIsWin, init }) {
   }
 
   return (
-    <>
-      {/* <button onClick={() => setIsOpen(true)}>Open dialog</button> */}
-      <Dialog open={isWin} onClose={() => setIsWin(false)} className="relative z-50">
-        <div className="text-black fixed inset-0 flex w-screen items-center justify-center p-4">
-          <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
-            <DialogTitle className="font-bold">You Win!</DialogTitle>
-            <div className="flex gap-4">
-              <button onClick={() => restart()}>Play Again!</button>
-            </div>
-          </DialogPanel>
-        </div>
-      </Dialog>
-    </>
+    <Dialog open={isWin} onClose={() => restart()}>
+      <div className="text-white fixed inset-0 flex  items-center justify-center w-screen backdrop">
+        <DialogPanel className="flex flex-col items-center justify-center min-h-80 h-1/2 aspect-square text-center">
+          <Image className='' src={winner} style={{objectFit:"contain"}} alt='piece'></Image>
+          <p className='bit font-bold text-9xl'>Wins!</p>
+          <button className='bit text-2xl' onClick={() => restart()}>restart</button>
+        </DialogPanel>
+      </div>
+    </Dialog>
   )
 }
 

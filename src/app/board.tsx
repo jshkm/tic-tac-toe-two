@@ -36,6 +36,7 @@ export default function Board() {
   const [Opool, setOpool] = useState([O3, O2, O1])
 
   const [isWin, setIsWin] = useState(false)
+  const [winner, setWinner] = useState(null)
   
 
   useEffect(() => {
@@ -59,34 +60,42 @@ export default function Board() {
       // first row
       console.log('win!')
       setIsWin(true)
+      setWinner(board[0][0].src)
     } else if (board[1][0].src != null && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
       console.log('win!')
       setIsWin(true)
+      setWinner(board[1][0].src)
     } else if (board[2][0].src != null && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
       console.log('win!')
       setIsWin(true)
+      setWinner(board[2][0].src)
     } else if (board[0][0].src != null && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
       console.log('win!')
       setIsWin(true)
+      setWinner(board[0][0].src)
     } else if (board[0][1].src != null && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
       console.log('win!')
       setIsWin(true)
+      setWinner(board[0][1].src)
     } else if (board[0][2].src != null && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
       console.log('win!')
       setIsWin(true)
+      setWinner(board[0][2].src)
     } else if (board[0][0].src != null && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
       console.log('win!')
       setIsWin(true)
+      setWinner(board[0][0].src)
     } else if (board[2][0].src != null && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
       console.log('win!')
       setIsWin(true)
+      setWinner(board[2][0].src)
     }
   }
 
@@ -169,7 +178,7 @@ export default function Board() {
     <div className='flex bg-black h-full aspect-square'>
       <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.chosen} onClick={() => setPiece(i, j)}>
         { piece.src ? (
-          <Image className={''}  src={piece.src} width={500} alt='piece'></Image>
+          <Image className='scale-50'  src={piece.src} width={500} alt='piece'></Image>
         ) : (
           <div className='h-full aspect-square'></div>
         )}
@@ -186,7 +195,7 @@ export default function Board() {
           ))
         ))}
       </div>
-      <Win isWin={isWin} setIsWin={setIsWin} init={init}></Win>
+      <Win isWin={isWin} setIsWin={setIsWin} init={init} winner={winner}></Win>
     </motion.div>
   );
 }
