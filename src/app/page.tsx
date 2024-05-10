@@ -49,6 +49,7 @@ export default function Home() {
         </>
       )}
 
+      { !start && (<p className='text-xl bit'>made by josh</p>)}
     </div>
   );
 }
