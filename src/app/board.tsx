@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-function Board({setXWins, setOWins, xWins, oWins, turn, setTurn}) {
+function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font}) {
   class Piece {
     constructor(src, chosen, i, j) {
       this.src = src;
@@ -194,7 +194,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn}) {
           ))
         ))}
       </div>
-      <Win isWin={isWin} setIsWin={setIsWin} init={init} winner={winner}></Win>
+      <Win isWin={isWin} setIsWin={setIsWin} init={init} winner={winner} font={font}></Win>
     </motion.div>
   );
 }
