@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
 import { Inter, } from "next/font/google";
 import localFont from 'next/font/local'
@@ -21,8 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bit.variable} ${inter.variable} ${bold.variable} ${jacq.variable} ${script.variable} ${serif.variable}`}>
-      <body>{children}</body>
-    </html>
+    <>
+      <html lang="en" className={`${bit.variable} ${inter.variable} ${bold.variable} ${jacq.variable} ${script.variable} ${serif.variable}`}>
+        <body>{children}</body>
+      </html>
+      <Analytics></Analytics>
+    </>
   );
 }
