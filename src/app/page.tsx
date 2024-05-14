@@ -59,7 +59,7 @@ export default function Home() {
             <motion.div className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>
               <Color piece={X} wins={xWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={0}></Color>
             </motion.div>
-            <p className='text-xl bit'>made by josh</p>
+            <motion.a whileHover={{opacity: .5}} href='https://www.linkedin.com/in/jshkm10/' className='text-xl bit'>made by josh</motion.a>
             <motion.div className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>
               <Color piece={O} wins={oWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={4}></Color>
             </motion.div>
