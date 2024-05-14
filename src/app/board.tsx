@@ -3,29 +3,49 @@ import Win from './winModal'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, setXColor, oColor, setOColor}) {
-  class Piece {
-    constructor(src, chosen, i, j) {
-      this.src = src;
-      this.chosen = chosen;
-      this.i = i;
-      this.j = j;
-    }
-  }
+interface BoardProps {
+  setXWins: Function;
+  setOWins: Function;
+  xWins: number;
+  oWins: number;
+  turn: string;
+  setTurn: Function;
+  font: string;
+  xColor: string;
+  setXColor: Function;
+  oColor: string;
+  setOColor: Function;
+}
 
+interface TilesProps {
+  piece: {
+    src: string;
+    chosen: string;
+    i: number;
+    j: number;
+  };
+  i: number;
+  j: number;
+}
+
+interface setPieceProps {
+  i: number;
+  j: number;
+}
+
+function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, setXColor, oColor, setOColor} : BoardProps) {
   const X = 'X'
   const O = 'O'
   
-  const none = new Piece(null, 0, '', null, null)
-  const [X1, setX1] = useState(new Piece(X, '', 0, 0))
-  const [X2, setX2] = useState(new Piece(X, '', 0, 0))
-  const [X3, setX3] = useState(new Piece(X, '', 0, 0))
-  
-  const [O1, setO1] = useState(new Piece(O, '', 0, 0))
-  const [O2, setO2] = useState(new Piece(O, '', 0, 0))
-  const [O3, setO3] = useState(new Piece(O, '', 0, 0))
-  const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse grayscale-[.85] brightness-200', null, null))
-  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse grayscale-[.85] brightness-200', null, null))
+  const none = {src: '', chosen: '', i: 0, j: 0}
+  const [X1, setX1] = useState({src: X, chosen: '', i: 0, j: 0})
+  const [X2, setX2] = useState({src: X, chosen: '', i: 0, j: 0})
+  const [X3, setX3] = useState({src: X, chosen: '', i: 0, j: 0})
+  const [O1, setO1] = useState({src: O, chosen: '', i: 0, j: 0})
+  const [O2, setO2] = useState({src: O, chosen: '', i: 0, j: 0})
+  const [O3, setO3] = useState({src: O, chosen: '', i: 0, j: 0})
+  const [tmpX, setTmpX] = useState({src: X, chosen: ' animate-pulse grayscale-[.85] brightness-200', i: -1, j: -1})
+  const [tmpO, setTmpO] = useState({src: O, chosen: ' animate-pulse grayscale-[.85] brightness-200', i: -1, j: -1})
 
   const [random, setRandom] = useState(0)
 
@@ -47,10 +67,10 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
   const init = () => {
     console.log('init')
-    tmpX.i = null
-    tmpX.j = null
-    tmpO.i = null
-    tmpO.j = null
+    tmpX.i = -1
+    tmpX.j = -1
+    tmpO.i = -1
+    tmpO.j = -1
     setTurn(X)
     setBoard([[none, none, none,], [none, none, none], [none, none, none]])
     setXpool([X3, X2, X1])
@@ -59,42 +79,42 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   }
 
   const checkWin = () => {
-    if (board[0][0].src != null && board[0][0].src == board[0][1].src && board[0][0].src == board[0][2].src) {
+    if (board[0][0].src != '' && board[0][0].src == board[0][1].src && board[0][0].src == board[0][2].src) {
       // first row
       console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
-    } else if (board[1][0].src != null && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
+    } else if (board[1][0].src != '' && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
       console.log('win!')
       setIsWin(true)
       setWinner(board[1][0])
-    } else if (board[2][0].src != null && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
+    } else if (board[2][0].src != '' && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
       console.log('win!')
       setIsWin(true)
       setWinner(board[2][0])
-    } else if (board[0][0].src != null && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
+    } else if (board[0][0].src != '' && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
       console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
-    } else if (board[0][1].src != null && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
+    } else if (board[0][1].src != '' && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
       console.log('win!')
       setIsWin(true)
       setWinner(board[0][1])
-    } else if (board[0][2].src != null && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
+    } else if (board[0][2].src != '' && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
       console.log('win!')
       setIsWin(true)
       setWinner(board[0][2])
-    } else if (board[0][0].src != null && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
+    } else if (board[0][0].src != '' && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
       console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
-    } else if (board[2][0].src != null && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
+    } else if (board[2][0].src != '' && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
       console.log('win!')
       setIsWin(true)
@@ -103,56 +123,69 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   }
 
   const checkNextPiece = async () => {
+    console.log('check next piece')
     if (turn == O) {
-      if (tmpO.i != null && tmpO.j != null) {
+      if (tmpO.i != -1 && tmpO.j != -1) {
+        console.log('uh oh')
+        console.log(tmpO)
         board[tmpO.i][tmpO.j] = none
       }
 
       setRandom(Math.floor(Math.random() * 3))
 
       let tmp = [X1, X2, X3].at(random)
-      let i = tmp.i
-      let j = tmp.j
 
-      tmpX.i = i
-      tmpX.j = j
+      if (tmp != null && tmp.i != null && tmp.j != null) {
+        let i = tmp.i
+        let j = tmp.j
 
-      board[i][j] = tmpX
-      Xpool.push(tmp)
+        tmpX.i = i
+        tmpX.j = j
+
+        board[i][j] = tmpX
+        Xpool.push(tmp)
+      }
     } else {
-      if (tmpX.i != null && tmpX.j != null) {
+      if (tmpX.i != -1 && tmpX.j != -1) {
         board[tmpX.i][tmpX.j] = none
       }
       
       setRandom(Math.floor(Math.random() * 3))
 
       let tmp = [O1, O2, O3].at(random)
-      let i = tmp.i
-      let j = tmp.j
 
-      tmpO.i = i
-      tmpO.j = j
+      if (tmp != null && tmp.i != null && tmp.j != null) {
+        let i = tmp.i
+        let j = tmp.j
 
-      board[i][j] = tmpO
-      Opool.push(tmp)
+        tmpO.i = i
+        tmpO.j = j
+
+        board[i][j] = tmpO
+        Opool.push(tmp)
+      }
     }
     setBoard(board)
   }
 
-  const setPiece = (i, j) => {
-    if (board[i][j].src == null && (Xpool.length > 0 || Opool.length > 0)) {
+  const setPiece = ({i, j} : setPieceProps) => {
+    if (board[i][j].src == '' && (Xpool.length > 0 || Opool.length > 0)) {
       if (turn == X) {
         let tmpX = Xpool.pop()
-        tmpX.i = i
-        tmpX.j = j
-        board[i][j] = tmpX
-        setXpool(Xpool)
+        if (tmpX) {
+          tmpX.i = i
+          tmpX.j = j
+          board[i][j] = tmpX
+          setXpool(Xpool)
+        }
       } else {
         let tmpO = Opool.pop()
-        tmpO.i = i
-        tmpO.j = j
-        board[i][j] = tmpO
-        setOpool(Opool)
+        if (tmpO) {
+          tmpO.i = i
+          tmpO.j = j
+          board[i][j] = tmpO
+          setOpool(Opool)
+        }
       }
       setTurn(turn == X ? O : X)
     }
@@ -163,7 +196,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
     setBoard(board)
     checkWin()
-    console.log('finished')
+    console.log(board)
   }
 
   const updateScore = () => {
@@ -176,9 +209,9 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
     }
   }
 
-  const Tiles = ({ piece, i, j }) => (
+  const Tiles = ({ piece, i, j } : TilesProps) => (
     <div className='flex bg-black h-full aspect-square'>
-      <motion.button whileHover={{ scale: 1.2 }} className={`h-full aspect-square ${piece.src == X ? xColor : oColor}` + piece.chosen} onClick={() => setPiece(i, j)}>
+      <motion.button whileHover={{ scale: 1.2 }} className={`h-full aspect-square ${piece.src == X ? xColor : oColor}` + piece.chosen} onClick={() => setPiece({i, j})}>
         { piece.src ? (
           <div className={'font-scale' + font}>{piece.src}</div>
         ) : (

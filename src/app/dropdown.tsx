@@ -2,14 +2,25 @@ import { motion } from 'framer-motion'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { useEffect } from 'react'
 
-function Drop({font, fonts, setFont, setFonts}) {
+interface DropProps {
+  font: string;
+  fonts: string[];
+  setFont: Function;
+  setFonts: Function;
+}
+
+interface setDropdownProps {
+  i: number;
+}
+
+function Drop({font, fonts, setFont, setFonts} : DropProps) {
 
   useEffect(() => {
     console.log('font')
     console.log(fonts)
   }, [font])
 
-  const setDropdown = (i) => {
+  const setDropdown = ({i} : setDropdownProps) => {
     let tmp = fonts[0]
     fonts[0] = fonts[i]
     fonts[i] = tmp
@@ -34,20 +45,20 @@ function Drop({font, fonts, setFont, setFonts}) {
           >
             <MenuItems anchor="bottom" className="flex flex-col h-full w-full backdrop origin-top transition hide-y">
               <MenuItem>
-                <button className={'text-6xl' + fonts[1]} onClick={() => setDropdown(1)}>Tic Tac Toe 2</button>
+                <motion.button whileHover={{scale: 1.1}}  className={'text-6xl' + fonts[1]} onClick={() => setDropdown({i: 1})}>Tic Tac Toe 2</motion.button>
               </MenuItem>
               <MenuItem>
-                <button className={'text-6xl' + fonts[2]} onClick={() => setDropdown(2)}>Tic Tac Toe 2</button>
+                <motion.button whileHover={{scale: 1.1}} className={'text-6xl' + fonts[2]} onClick={() => setDropdown({i: 2})}>Tic Tac Toe 2</motion.button>
               </MenuItem>
               <MenuItem>
-                <button className={'text-6xl' + fonts[3]} onClick={() => setDropdown(3)}>Tic Tac Toe 2</button>
+                <motion.button whileHover={{scale: 1.1}} className={'text-6xl' + fonts[3]} onClick={() => setDropdown({i: 3})}>Tic Tac Toe 2</motion.button>
               </MenuItem>
               <MenuItem>
-                <button className={'text-6xl' + fonts[4]} onClick={() => setDropdown(4)}>Tic Tac Toe 2</button>
+                <motion.button whileHover={{scale: 1.1}} className={'text-6xl' + fonts[4]} onClick={() => setDropdown({i: 4})}>Tic Tac Toe 2</motion.button>
               </MenuItem>
               <MenuItem>
                 {({ close }) => (
-                  <button className='text-3xl bit' onClick={close}>return</button>
+                  <motion.button whileHover={{scale: 1.1}} className='text-3xl bit' onClick={close}>return</motion.button>
                 )}
               </MenuItem>
             </MenuItems>
