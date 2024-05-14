@@ -6,7 +6,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, setXColor, yColor, setYColor}) {
+function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, setXColor, oColor, setOColor}) {
   class Piece {
     constructor(src, color, i, j) {
       this.src = src;
@@ -24,12 +24,11 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   const [X2, setX2] = useState(new Piece(X, xColor, 0, 0))
   const [X3, setX3] = useState(new Piece(X, xColor, 0, 0))
   
-  const [O1, setO1] = useState(new Piece(O, yColor, 0, 0))
-  const [O2, setO2] = useState(new Piece(O, yColor, 0, 0))
-  const [O3, setO3] = useState(new Piece(O, yColor, 0, 0))
-
+  const [O1, setO1] = useState(new Piece(O, oColor, 0, 0))
+  const [O2, setO2] = useState(new Piece(O, oColor, 0, 0))
+  const [O3, setO3] = useState(new Piece(O, oColor, 0, 0))
   const [tmpX, setTmpX] = useState(new Piece(X, ' animate-pulse grayscale-[.85] brightness-200' + xColor, null, null))
-  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse grayscale-[.85] brightness-200' + yColor, null, null))
+  const [tmpO, setTmpO] = useState(new Piece(O, ' animate-pulse grayscale-[.85] brightness-200' + oColor, null, null))
 
   const [random, setRandom] = useState(0)
 
@@ -44,6 +43,11 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
     updateScore()
     console.log('render')
   }, [winner])
+
+  useEffect(() => {
+    console.log('in board')
+    setColors()
+  })
 
   const init = () => {
     console.log('init')
@@ -176,6 +180,17 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
     }
   }
 
+  const setColors = () => {
+    X1.color = xColor
+    X2.color = xColor
+    X3.color = xColor
+    tmpX.color = ' animate-pulse grayscale-[.85] brightness-200' + xColor
+    O1.color = oColor
+    O2.color = oColor
+    O3.color = oColor
+    tmpO.color = ' animate-pulse grayscale-[.85] brightness-200' + oColor
+  }
+
   const Tiles = ({ piece, i, j }) => (
     <div className='flex bg-black h-full aspect-square'>
       <motion.button whileHover={{ scale: 1.2 }} className={'h-full aspect-square' + piece.color} onClick={() => setPiece(i, j)}>
@@ -189,7 +204,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   );
 
   return (
-    <motion.div initial={{scale: 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 400, damping: 38}} className='flex items-center justify-center h-5/6 w-full'>
+    <motion.div initial={{scale: 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 400, damping: 38}} className='flex flex-col items-center justify-center h-5/6 w-full'>
       <div className='bg-white h-3/4 aspect-square grid min-h-80 grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (

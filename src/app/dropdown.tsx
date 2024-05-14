@@ -21,7 +21,7 @@ function Drop({font, fonts, setFont, setFonts}) {
 
   return (
       <Menu>
-        <motion.div whileHover={{opacity: '50%'}}>
+        <motion.div whileHover={{opacity: .5}}>
           <MenuButton className={'text-7xl' + font} >Tic Tac Toe 2</MenuButton>
         </motion.div>
           <Transition

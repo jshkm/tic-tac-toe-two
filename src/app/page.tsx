@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import Board from './board'
 import Drop from './dropdown'
+import Color from './colorModal'
 
 export default function Home() {
   const X = 'X'
@@ -14,8 +15,10 @@ export default function Home() {
   const [xWins, setXWins] = useState(0)
   const [oWins, setOWins] = useState(0)
   const [turn, setTurn] = useState(X)
-  const [xColor, setXColor] = useState(' text-sky-500')
-  const [yColor, setYColor] = useState(' text-yellow-500')
+  const [xColor, setXColor] = useState(' text-red-500')
+  const [oColor, setOColor] = useState(' text-blue-800')
+  const bgColors = [' bg-red-500', ' bg-orange-300', ' bg-amber-200', ' bg-green-900', ' bg-blue-800', ' bg-fuchsia-400']
+  const txtColors = [' text-red-500', ' text-orange-300', ' text-amber-200', ' text-green-900', ' text-blue-800', ' text-fuchsia-400']
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +37,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(xWins)
+    // console.log(xColor)
     console.log('lucky duck')
   })
 
@@ -51,11 +54,15 @@ export default function Home() {
           <motion.div initial={{ y: '-100%' }} animate={{y:'0%'}}>
             <Drop font={font} fonts={fonts} setFont={setFont} setFonts={setFonts}></Drop>
           </motion.div>
-          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn} font={font} xColor={xColor} setXColor={setXColor} yColor={yColor} setYColor={yColor}></Board>
+          <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor}></Board>
           <div className={'flex flex-row justify-around items-end w-full text-6xl' + font}>
-            <motion.button className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>Player X: {xWins}</motion.button>
+            <motion.div className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>
+              <Color piece={X} wins={xWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={0}></Color>
+            </motion.div>
             <p className='text-xl bit'>made by josh</p>
-            <motion.button className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>Player O: {oWins}</motion.button>
+            <motion.div className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>
+              <Color piece={O} wins={oWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={4}></Color>
+            </motion.div>
           </div>
         </>
       )}
