@@ -25,10 +25,8 @@ function Color({piece, wins, bgColors, txtColors, font, xColor, setXColor, oColo
     let [idx, setIdx] = useState(start)
 
     const selectColor = ({i} : selectColorProps) => {
-        console.log(i)
         if (piece == 'X') {
             setXColor(txtColors[i])
-            console.log(txtColors[i])
         } else {
             setOColor(txtColors[i])
         }

@@ -14,17 +14,10 @@ interface setDropdownProps {
 }
 
 function Drop({font, fonts, setFont, setFonts} : DropProps) {
-
-  useEffect(() => {
-    console.log('font')
-    console.log(fonts)
-  }, [font])
-
   const setDropdown = ({i} : setDropdownProps) => {
     let tmp = fonts[0]
     fonts[0] = fonts[i]
     fonts[i] = tmp
-    console.log(fonts)
     setFont(fonts[0])
     setFonts(fonts)
   }

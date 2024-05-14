@@ -28,18 +28,12 @@ export default function Home() {
           animateTitle()
           return count;
         }
-        console.log(count % fonts.length)
         setFont(fonts[count % fonts.length])
         return count + 1;
       });
     }, 120);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    // console.log(xColor)
-    console.log('lucky duck')
-  })
 
   const animateTitle = () => {
     setFont(' bit')

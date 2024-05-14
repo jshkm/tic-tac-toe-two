@@ -58,15 +58,9 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
   useEffect(() => {
     updateScore()
-    console.log('render')
   }, [winner])
 
-  useEffect(() => {
-    console.log('in board')
-  })
-
   const init = () => {
-    console.log('init')
     tmpX.i = -1
     tmpX.j = -1
     tmpO.i = -1
@@ -81,53 +75,42 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   const checkWin = () => {
     if (board[0][0].src != '' && board[0][0].src == board[0][1].src && board[0][0].src == board[0][2].src) {
       // first row
-      console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
     } else if (board[1][0].src != '' && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
-      console.log('win!')
       setIsWin(true)
       setWinner(board[1][0])
     } else if (board[2][0].src != '' && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
-      console.log('win!')
       setIsWin(true)
       setWinner(board[2][0])
     } else if (board[0][0].src != '' && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
-      console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
     } else if (board[0][1].src != '' && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
-      console.log('win!')
       setIsWin(true)
       setWinner(board[0][1])
     } else if (board[0][2].src != '' && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
-      console.log('win!')
       setIsWin(true)
       setWinner(board[0][2])
     } else if (board[0][0].src != '' && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
-      console.log('win!')
       setIsWin(true)
       setWinner(board[0][0])
     } else if (board[2][0].src != '' && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
-      console.log('win!')
       setIsWin(true)
       setWinner(board[2][0])
     }
   }
 
   const checkNextPiece = async () => {
-    console.log('check next piece')
     if (turn == O) {
       if (tmpO.i != -1 && tmpO.j != -1) {
-        console.log('uh oh')
-        console.log(tmpO)
         board[tmpO.i][tmpO.j] = none
       }
 
@@ -196,16 +179,13 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
     setBoard(board)
     checkWin()
-    console.log(board)
   }
 
   const updateScore = () => {
     if (winner.src == X) {
       setXWins(xWins + 1)
-      console.log(xWins)
     } else if (winner.src == O) {
       setOWins(oWins + 1)
-      console.log(oWins)
     }
   }
 
