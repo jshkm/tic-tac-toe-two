@@ -12,7 +12,7 @@ const serif = localFont({ src: '../../public/serif.ttf', variable: "--serif-font
 
 export const metadata: Metadata = {
   title: "Tic Tac Toe Two",
-  description: "The new way to play tic tac toe",
+  description: "The new way to play tic tac toe :)",
 };
 
 export default function RootLayout({
