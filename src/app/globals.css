@@ -6,10 +6,11 @@ body {
   background: black;
   color: white;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .font-scale {
-  font-size: clamp(69px, 10vh, 500px);
+  font-size: clamp(69px, 10vw, 100px);
   font-weight: bold;
 }
 

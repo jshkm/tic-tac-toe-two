@@ -49,19 +49,18 @@ export default function Home() {
             <Drop font={font} fonts={fonts} setFont={setFont} setFonts={setFonts}></Drop>
           </motion.div>
           <Board setXWins={setXWins} setOWins={setOWins} xWins={xWins} oWins={oWins} turn={turn} setTurn={setTurn} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor}></Board>
-          <div className={'flex flex-row justify-around items-end w-full text-6xl' + font}>
+          <div className={'flex flex-col items-center justify-around w-full text-6xl sm:flex-row' + font}>
             <motion.div className={`${turn == O && 'opacity-20'}`} initial={{x: '-100%'}} animate={{x:0}}>
               <Color piece={X} wins={xWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={0}></Color>
             </motion.div>
-            <motion.a whileHover={{opacity: .5}} href='https://www.linkedin.com/in/jshkm10/' className='text-xl bit'>made by josh</motion.a>
             <motion.div className={`${turn == X && 'opacity-20'}`} initial={{x: '100%'}} animate={{x:0}}>
               <Color piece={O} wins={oWins} bgColors={bgColors} txtColors={txtColors} font={font} xColor={xColor} setXColor={setXColor} oColor={oColor} setOColor={setOColor} start={4}></Color>
             </motion.div>
           </div>
         </>
       )}
-
-      { !start && (<p className='text-xl bit'>made by josh</p>)}
+      
+      <motion.a whileHover={{opacity: .5}} href='https://www.linkedin.com/in/jshkm10/' className='text-xl bit'>made by josh</motion.a>
     </div>
   );
 }

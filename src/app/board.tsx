@@ -56,6 +56,9 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   const [isWin, setIsWin] = useState(false)
   const [winner, setWinner] = useState(none)
 
+  let sound = new Audio('../sound.mp3')
+  let winSound = new Audio('../win-sound.mp3')
+
   useEffect(() => {
     updateScore()
   }, [winner])
@@ -77,34 +80,42 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
       // first row
       setIsWin(true)
       setWinner(board[0][0])
+      winSound.play()
     } else if (board[1][0].src != '' && board[1][0].src == board[1][1].src && board[1][0].src == board[1][2].src) {
       // second row
       setIsWin(true)
       setWinner(board[1][0])
+      winSound.play()
     } else if (board[2][0].src != '' && board[2][0].src == board[2][1].src && board[2][0].src == board[2][2].src) {
       // third row
       setIsWin(true)
       setWinner(board[2][0])
+      winSound.play()
     } else if (board[0][0].src != '' && board[0][0].src == board[1][0].src && board[0][0].src == board[2][0].src) {
       // first col
       setIsWin(true)
       setWinner(board[0][0])
+      winSound.play()
     } else if (board[0][1].src != '' && board[0][1].src == board[1][1].src && board[0][1].src == board[2][1].src) {
       // second col
       setIsWin(true)
       setWinner(board[0][1])
+      winSound.play()
     } else if (board[0][2].src != '' && board[0][2].src == board[1][2].src && board[0][2].src == board[2][2].src) {
       // third col
       setIsWin(true)
       setWinner(board[0][2])
+      winSound.play()
     } else if (board[0][0].src != '' && board[0][0].src == board[1][1].src && board[0][0].src == board[2][2].src) {
       // left diag
       setIsWin(true)
       setWinner(board[0][0])
+      winSound.play()
     } else if (board[2][0].src != '' && board[2][0].src == board[1][1].src && board[2][0].src == board[0][2].src) {
       // right diag
       setIsWin(true)
       setWinner(board[2][0])
+      winSound.play()
     }
   }
 
@@ -170,13 +181,14 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
           setOpool(Opool)
         }
       }
+      sound.play()
       setTurn(turn == X ? O : X)
     }
 
     if (Xpool.length == 0 && Opool.length == 0) {
       checkNextPiece()
     }
-
+    
     setBoard(board)
     checkWin()
   }
@@ -203,7 +215,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
   return (
     <motion.div initial={{scale: 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 400, damping: 38}} className='flex flex-col items-center justify-center h-5/6 w-full'>
-      <div className='bg-white h-3/4 aspect-square grid min-h-80 grid-cols-3 gap-2'>
+      <div className='bg-white w-3/4 aspect-square grid min-w-80 max-w-3xl grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (
             <Tiles piece={col} i={i} j={j} key={`${i}-${j}`}></Tiles>

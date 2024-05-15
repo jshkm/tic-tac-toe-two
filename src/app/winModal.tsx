@@ -15,7 +15,7 @@ interface WinProps {
   oColor: string;
 }
 
-function Win({ isWin, setIsWin, init, winner, font, xColor, oColor }: WinProps) {
+function Win({ isWin, setIsWin, init, winner, font, xColor, oColor } : WinProps) {
 
   const restart = () => {
     setIsWin(false)
