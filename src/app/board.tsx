@@ -201,6 +201,23 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
     }
   }
 
+  const [size, setSize] = useState(0);
+
+  useEffect(() => {
+
+    const handleResize = () => {
+      const minSize = Math.min(window.innerWidth, window.innerHeight);
+      setSize(minSize * 0.8); // Adjust the multiplier as needed for padding
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const Tiles = ({ piece, i, j } : TilesProps) => (
     <div className='flex bg-black h-full aspect-square'>
       <motion.button whileHover={{ scale: 1.2 }} className={`h-full aspect-square ${piece.src == X ? xColor : oColor}` + piece.chosen} onClick={() => setPiece({i, j})}>
@@ -218,9 +235,13 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
       initial={{scale: 0}}
       animate={{scale: 1}}
       transition={{type: "spring", stiffness: 400, damping: 38}}
-      className='flex flex-col items-center justify-center max-w-full w-2/3 aspect-square'
+      className='flex flex-col items-center justify-center'
+      style={{
+        width: size,
+        height: size,
+      }}
     >
-      <div className='bg-white w-3/4 aspect-square max-h-full max-w-4xl grid min-w-80 grid-cols-3 gap-2'>
+      <div className='bg-white h-5/6 min-h-80 grid grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (
             <Tiles piece={col} i={i} j={j} key={`${i}-${j}`}></Tiles>

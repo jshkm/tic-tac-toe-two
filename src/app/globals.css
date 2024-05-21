@@ -5,12 +5,12 @@
 body {
   background: black;
   color: white;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  /* overflow-y: hidden;
+  overflow-x: hidden; */
 }
 
 .font-scale {
-  font-size: clamp(69px, 10vw, 100px);
+  font-size: clamp(60px, 10vh, 100px);
   font-weight: bold;
 }
 

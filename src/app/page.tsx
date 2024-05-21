@@ -41,8 +41,8 @@ export default function Home() {
   }
 
   return (
-    <div className='flex flex-col space-y-4 py-8 justify-center items-center h-screen w-screen'>
-      {!start && (<h1 className={'text-7xl' + font}>Tic Tac Toe 2</h1>)}
+    <div className='flex flex-col space-y-4 py-8 justify-center items-center h-screen'>
+      {!start && (<h1 className={'text-6xl' + font}>Tic Tac Toe 2</h1>)}
       { start && (
         <>
           <motion.div initial={{ y: '-100%' }} animate={{y:'0%'}}>
