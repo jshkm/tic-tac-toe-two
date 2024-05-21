@@ -9,6 +9,11 @@ body {
   overflow-x: hidden;
 }
 
+.max-h-75 {
+  max-width: 75%;
+  border-color: red;
+}
+
 .font-scale {
   font-size: clamp(69px, 10vw, 100px);
   font-weight: bold;

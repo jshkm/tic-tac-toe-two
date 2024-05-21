@@ -41,7 +41,7 @@ export default function Home() {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen'>
+    <div className='flex flex-col space-y-4 py-8 justify-center items-center h-screen w-screen'>
       {!start && (<h1 className={'text-7xl' + font}>Tic Tac Toe 2</h1>)}
       { start && (
         <>

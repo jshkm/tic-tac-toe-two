@@ -214,8 +214,13 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
   );
 
   return (
-    <motion.div initial={{scale: 0}} animate={{scale: 1}} transition={{type: "spring", stiffness: 400, damping: 38}} className='flex flex-col items-center justify-center h-5/6 w-full'>
-      <div className='bg-white w-3/4 aspect-square grid min-w-80 max-w-3xl grid-cols-3 gap-2'>
+    <motion.div
+      initial={{scale: 0}}
+      animate={{scale: 1}}
+      transition={{type: "spring", stiffness: 400, damping: 38}}
+      className='flex flex-col items-center justify-center max-w-full w-2/3 aspect-square'
+    >
+      <div className='bg-white w-3/4 aspect-square max-h-full max-w-4xl grid min-w-80 grid-cols-3 gap-2'>
         {board.map((row, i) => (
           row.map((col, j) => (
             <Tiles piece={col} i={i} j={j} key={`${i}-${j}`}></Tiles>
