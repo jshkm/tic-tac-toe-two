@@ -207,7 +207,7 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
 
     const handleResize = () => {
       const minSize = Math.min(window.innerWidth, window.innerHeight);
-      setSize(minSize * 0.8); // Adjust the multiplier as needed for padding
+      setSize(minSize * 0.9); // Adjust the multiplier as needed for padding
     };
 
     handleResize();
@@ -217,6 +217,10 @@ function Board({setXWins, setOWins, xWins, oWins, turn, setTurn, font, xColor, s
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(window.innerWidth)
+  })
 
   const Tiles = ({ piece, i, j } : TilesProps) => (
     <div className='flex bg-black h-full aspect-square'>
