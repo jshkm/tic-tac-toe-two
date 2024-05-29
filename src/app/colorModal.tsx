@@ -39,7 +39,7 @@ function Color({piece, wins, bgColors, txtColors, font, xColor, setXColor, oColo
         <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
         <div className="text-white fixed inset-0 flex flex-col items-center justify-center h-screen w-screen backdrop">
             <div className={'font-scale scale-75' + font}>Set Color for {piece}</div>
-            <DialogPanel className="grid grid-cols-3 gap-20 min-w-80 w-5/6">
+            <DialogPanel className="grid grid-cols-3 gap-20 min-w-80 w-2/3">
                 {bgColors.map((color, i) => (
                     <motion.button whileHover={{scale: 1.1}} className={`h-3/4 aspect-square ${i == idx && 'border'}` + color} onClick={() => selectColor({i})} key={i}></motion.button>
                 ))}
