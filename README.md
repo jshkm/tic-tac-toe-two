@@ -1,3 +1,6 @@
+## Tic Tac Toe Two
+I saw a version of this on a hardware toy on Instagram. I thought to myself, "I should build that." So I did! Check out the final project [here](https://tictactoetwo.com)! A fun project to brush up on Next.js and Tailwind :)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
